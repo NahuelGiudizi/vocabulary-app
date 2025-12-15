@@ -36,7 +36,7 @@ jobs:
         working-directory: frontend
         env:
           VITE_STATIC_MODE: 'true'
-          VITE_TTS_WORKER_URL: 'https://vocabulary-tts.nahuelgiudizi.workers.dev'
+          VITE_TTS_WORKER_URL: 'https://vocabulary-tts.vocabbuilder.workers.dev'
         run: npm run build
 
       - name: Setup Pages
