@@ -1,87 +1,83 @@
 /**
  * VoiceSelector Component
  * 
- * Dropdown selector for choosing TTS voice.
+ * Grouped voice selector for pre-generated TTS audio library.
  */
 
 import React, { memo } from 'react';
-import { Volume2, Mic, Loader2 } from 'lucide-react';
+import { Volume2 } from 'lucide-react';
+
+// Voice configurations matching tts-audio-library
+const VOICE_GROUPS = {
+    'en-US': {
+        name: 'American English',
+        voices: [
+            { id: 'en-US-AriaNeural', name: 'Aria', gender: 'Female' },
+            { id: 'en-US-GuyNeural', name: 'Guy', gender: 'Male' },
+            { id: 'en-US-JennyNeural', name: 'Jenny', gender: 'Female' },
+            { id: 'en-US-ChristopherNeural', name: 'Christopher', gender: 'Male' },
+        ]
+    },
+    'en-GB': {
+        name: 'British English',
+        voices: [
+            { id: 'en-GB-SoniaNeural', name: 'Sonia', gender: 'Female' },
+            { id: 'en-GB-RyanNeural', name: 'Ryan', gender: 'Male' },
+        ]
+    },
+    'en-AU': {
+        name: 'Australian English',
+        voices: [
+            { id: 'en-AU-NatashaNeural', name: 'Natasha', gender: 'Female' },
+            { id: 'en-AU-WilliamNeural', name: 'William', gender: 'Male' },
+        ]
+    }
+};
 
 /**
- * VoiceSelector component for choosing TTS voice
+ * VoiceSelector component for choosing pre-generated TTS voice
  */
 const VoiceSelector = memo(function VoiceSelector({
     voice,
-    voices,
     onVoiceChange,
-    onTestVoice,
-    loading = false,
-    voicesLoading = false,
 }) {
     return (
-        <div className="space-y-3">
-            <div className="flex items-center gap-2 mb-2">
-                <Mic className="w-5 h-5 text-gray-500" />
-                <h3 className="text-lg font-medium text-gray-900">Voice Selection (Edge TTS)</h3>
-            </div>
+        <div className="space-y-4">
+            <h3 className="text-sm font-medium text-gray-900 flex items-center gap-2">
+                <Volume2 className="w-4 h-4" />
+                Voice Settings
+            </h3>
 
-            <p className="text-sm text-gray-500 mb-4">
-                Choose the voice for text-to-speech playback. Edge TTS provides high-quality
-                Microsoft neural voices.
-            </p>
-
-            {voicesLoading ? (
-                <div className="flex items-center justify-center py-8 text-gray-500">
-                    <Loader2 className="w-6 h-6 animate-spin mr-2" />
-                    <span>Loading Edge TTS voices...</span>
-                </div>
-            ) : voices.length === 0 ? (
-                <div className="text-center py-8 text-gray-500">
-                    <p>No voices available. Make sure the backend is running.</p>
-                </div>
-            ) : (
-                <div className="grid gap-2 max-h-80 overflow-y-auto">
-                    {voices.map((v) => (
-                        <label
-                            key={v.id}
-                            className={`
-                                flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition-all
-                                ${voice === v.id
-                                    ? 'border-primary-500 bg-primary-50'
-                                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                                }
-                            `}
-                        >
-                            <div className="flex items-center gap-3">
-                                <input
-                                    type="radio"
-                                    name="voice"
-                                    value={v.id}
-                                    checked={voice === v.id}
-                                    onChange={() => onVoiceChange(v.id)}
-                                    className="w-4 h-4 text-primary-600 focus:ring-primary-500"
-                                />
-                                <div>
-                                    <span className="font-medium text-gray-900">{v.name}</span>
-                                    <p className="text-xs text-gray-500">{v.id}</p>
-                                </div>
-                            </div>
-
+            {Object.entries(VOICE_GROUPS).map(([locale, group]) => (
+                <div key={locale} className="space-y-2">
+                    <p className="text-xs font-medium text-gray-500 uppercase">
+                        {group.name}
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                        {group.voices.map((v) => (
                             <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    onTestVoice && onTestVoice(v.id);
-                                }}
-                                disabled={loading}
-                                className="p-2 rounded-full hover:bg-gray-200 text-gray-600 transition-colors disabled:opacity-50"
-                                title="Test this voice"
+                                key={v.id}
+                                onClick={() => onVoiceChange(v.id)}
+                                className={`
+                                    flex items-center justify-between p-3 rounded-lg border transition-colors
+                                    ${voice === v.id
+                                        ? 'border-blue-500 bg-blue-50'
+                                        : 'border-gray-200 hover:bg-gray-50'
+                                    }
+                                `}
                             >
-                                <Volume2 className="w-4 h-4" />
+                                <div className="text-left">
+                                    <div className="font-medium text-sm">{v.name}</div>
+                                    <div className="text-xs text-gray-500">{v.gender}</div>
+                                </div>
+                                {voice === v.id && (
+                                    <div className="w-2 h-2 rounded-full bg-blue-500" />
+                                )}
                             </button>
-                        </label>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            )}
+            ))}
         </div>
     );
 });

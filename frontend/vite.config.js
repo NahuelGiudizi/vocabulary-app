@@ -19,6 +19,11 @@ export default defineConfig(({ mode }) => {
                 '/static': {
                     target: 'http://localhost:8002',
                     changeOrigin: true
+                },
+                '/tts-audio': {
+                    target: 'http://localhost:8002',
+                    changeOrigin: true,
+                    rewrite: (path) => path.replace(/^\/tts-audio/, '/static/tts-audio')
                 }
             }
         },
