@@ -1,0 +1,137 @@
+{
+  "pos_mapping": {
+    "a": {
+      "name": "Article",
+      "color": "gray"
+    },
+    "c": {
+      "name": "Conjunction",
+      "color": "purple"
+    },
+    "d": {
+      "name": "Determiner",
+      "color": "pink"
+    },
+    "e": {
+      "name": "Existential there",
+      "color": "gray"
+    },
+    "i": {
+      "name": "Preposition",
+      "color": "cyan"
+    },
+    "j": {
+      "name": "Adjective",
+      "color": "green"
+    },
+    "m": {
+      "name": "Number",
+      "color": "orange"
+    },
+    "n": {
+      "name": "Noun",
+      "color": "blue"
+    },
+    "p": {
+      "name": "Pronoun",
+      "color": "indigo"
+    },
+    "r": {
+      "name": "Adverb",
+      "color": "yellow"
+    },
+    "t": {
+      "name": "Infinitive marker",
+      "color": "gray"
+    },
+    "u": {
+      "name": "Interjection",
+      "color": "red"
+    },
+    "v": {
+      "name": "Verb",
+      "color": "emerald"
+    },
+    "x": {
+      "name": "Negation",
+      "color": "rose"
+    }
+  },
+  "themes": {
+    "qa_manager": {
+      "name": "QA Manager",
+      "emoji": "🧪",
+      "description": "Software quality assurance and testing"
+    },
+    "general_business": {
+      "name": "General Business",
+      "emoji": "💼",
+      "description": "Professional business communication"
+    },
+    "daily_life": {
+      "name": "Daily Life",
+      "emoji": "🏠",
+      "description": "Everyday situations and conversations"
+    },
+    "academic": {
+      "name": "Academic",
+      "emoji": "📚",
+      "description": "Educational and scholarly contexts"
+    },
+    "technology": {
+      "name": "Technology",
+      "emoji": "💻",
+      "description": "Tech industry and computing"
+    }
+  },
+  "voices": {
+    "en-US": [
+      {
+        "id": "en-US-AriaNeural",
+        "name": "Aria",
+        "gender": "Female"
+      },
+      {
+        "id": "en-US-GuyNeural",
+        "name": "Guy",
+        "gender": "Male"
+      },
+      {
+        "id": "en-US-JennyNeural",
+        "name": "Jenny",
+        "gender": "Female"
+      },
+      {
+        "id": "en-US-ChristopherNeural",
+        "name": "Christopher",
+        "gender": "Male"
+      }
+    ],
+    "en-GB": [
+      {
+        "id": "en-GB-SoniaNeural",
+        "name": "Sonia",
+        "gender": "Female"
+      },
+      {
+        "id": "en-GB-RyanNeural",
+        "name": "Ryan",
+        "gender": "Male"
+      }
+    ],
+    "en-AU": [
+      {
+        "id": "en-AU-NatashaNeural",
+        "name": "Natasha",
+        "gender": "Female"
+      },
+      {
+        "id": "en-AU-WilliamNeural",
+        "name": "William",
+        "gender": "Male"
+      }
+    ]
+  },
+  "tts_worker_url": "https://your-worker.workers.dev/tts",
+  "version": "1.0.0"
+}
