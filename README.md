@@ -4,13 +4,13 @@ A production-ready web application that helps IT professionals learn the 5,000 m
 
 ## Features
 
-- 📚 **5,000 Word Vocabulary** - Based on COCA (Corpus of Contemporary American English) word frequency data
-- 🤖 **AI-Generated Sentences** - Uses Ollama with customizable models for context-aware sentence generation
-- 🎯 **Professional Themes** - 5 IT industry themes (QA Manager, Software Dev, Agile/Scrum, DevOps, Business)
-- 🗣️ **Text-to-Speech** - Both offline (pyttsx3) and online (gTTS) pronunciation support
-- 📊 **Virtual Scrolling** - Smooth performance with 5,000+ words using react-window
-- 📤 **Multiple Export Formats** - PDF, Anki flashcards, JSON, TXT, and Audio ZIP
-- 🏷️ **POS-Aware Generation** - Sentences correctly use words based on their part of speech
+- **5,000 Word Vocabulary** - Based on COCA (Corpus of Contemporary American English) word frequency data
+- **AI-Generated Sentences** - Uses Ollama with customizable models for context-aware sentence generation
+- **Professional Themes** - 5 IT industry themes (QA Manager, Software Dev, Agile/Scrum, DevOps, Business)
+- **Text-to-Speech** - Both offline (pyttsx3) and online (gTTS) pronunciation support
+- **Virtual Scrolling** - Smooth performance with 5,000+ words using react-window
+- **Multiple Export Formats** - PDF, Anki flashcards, JSON, TXT, and Audio ZIP
+- **POS-Aware Generation** - Sentences correctly use words based on their part of speech
 
 ## Tech Stack
 
@@ -168,11 +168,11 @@ Options:
 
 | Theme | Description | Example Context |
 |-------|-------------|-----------------|
-| 🔍 QA Manager | Quality Assurance | Test automation, defect tracking, quality metrics |
-| 💻 Software Dev | Development | Code reviews, debugging, architecture discussions |
-| 📋 Agile/Scrum | Methodology | Sprint planning, retrospectives, backlog management |
-| 🚀 DevOps | Operations | CI/CD pipelines, infrastructure, monitoring |
-| 💼 General Business | Professional | Meetings, presentations, stakeholder communication |
+| QA Manager | Quality Assurance | Test automation, defect tracking, quality metrics |
+| Software Dev | Development | Code reviews, debugging, architecture discussions |
+| Agile/Scrum | Methodology | Sprint planning, retrospectives, backlog management |
+| DevOps | Operations | CI/CD pipelines, infrastructure, monitoring |
+| General Business | Professional | Meetings, presentations, stakeholder communication |
 
 ## POS-Aware Generation
 
