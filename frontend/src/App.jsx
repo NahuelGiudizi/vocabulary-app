@@ -37,7 +37,7 @@ import VirtualWordList from './components/VirtualWordListV2';
 // Hooks
 import { useStats, ThemeProvider, useThemeContext } from './hooks';
 import { useVirtualWords } from './hooks/useVirtualWords';
-import { useAudio } from './hooks/useAudio';
+import { usePreGeneratedAudio } from './hooks/usePreGeneratedAudio';
 
 // API
 import { generationApi, configApi } from './services/api';
@@ -186,12 +186,7 @@ function StatusBar({ ollamaStatus, loading }) {
  */
 function SettingsPanel({ isOpen, onClose }) {
     const { currentTheme, selectTheme, themesList } = useThemeContext();
-    const audio = useAudio();
-
-    const handleTestVoice = (voiceId) => {
-        // Play test with the specific voice (pass as third parameter)
-        audio.playText("Hello! This is a test of the text to speech voice.", null, voiceId);
-    };
+    const audio = usePreGeneratedAudio();
 
     if (!isOpen) return null;
 
@@ -224,12 +219,8 @@ function SettingsPanel({ isOpen, onClose }) {
                     {/* Voice selector */}
                     <div className="pt-6 border-t border-gray-200">
                         <VoiceSelector
-                            voice={audio.voice}
-                            voices={audio.voices}
+                            voice={audio.currentVoice}
                             onVoiceChange={audio.changeVoice}
-                            onTestVoice={handleTestVoice}
-                            loading={audio.loading}
-                            voicesLoading={audio.voicesLoading}
                         />
                     </div>
 
