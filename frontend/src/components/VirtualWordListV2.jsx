@@ -42,7 +42,7 @@ function getScrollIndicatorText(index, word, sortBy, totalCount) {
                 };
         }
     }
-    
+
     // Fallback: estimate based on index
     if (sortBy === 'rank') {
         const estimatedRank = index + 1;
@@ -75,9 +75,9 @@ function getEstimatedLetter(index, total) {
 /**
  * Scroll Indicator Component
  */
-const ScrollIndicator = memo(function ScrollIndicator({ 
-    visible, 
-    text, 
+const ScrollIndicator = memo(function ScrollIndicator({
+    visible,
+    text,
     subtext,
     top,
 }) {
@@ -93,9 +93,9 @@ const ScrollIndicator = memo(function ScrollIndicator({
                 opacity: visible ? 1 : 0,
             }}
         >
-            <div 
+            <div
                 className="flex items-center justify-end"
-                style={{ 
+                style={{
                     transform: 'translateY(-50%)',
                     paddingRight: '8px',
                 }}
@@ -106,7 +106,7 @@ const ScrollIndicator = memo(function ScrollIndicator({
                         <div className="text-xs text-gray-300 leading-tight">{subtext}</div>
                     )}
                 </div>
-                <div 
+                <div
                     style={{
                         width: 0,
                         height: 0,
@@ -172,14 +172,17 @@ const VirtualWordList = memo(function VirtualWordList({
     const scrollTimeoutRef = useRef(null);
     const lastRangeRef = useRef({ start: 0, end: 0 });
 
-    // Estimate row height
+    // Estimate row height (fallback)
     const estimateSize = useCallback(() => 280, []);
 
+    // Variable size support
     const virtualizer = useVirtualizer({
         count: totalCount, // Full dataset count!
         getScrollElement: () => parentRef.current,
         estimateSize,
         overscan: 5,
+        // Medir altura real de cada elemento
+        measureElement: (el) => el.getBoundingClientRect().height,
     });
 
     const items = virtualizer.getVirtualItems();
@@ -192,7 +195,7 @@ const VirtualWordList = memo(function VirtualWordList({
         const endIndex = items[items.length - 1]?.index ?? 0;
 
         // Only load if range actually changed
-        if (startIndex !== lastRangeRef.current.start || 
+        if (startIndex !== lastRangeRef.current.start ||
             endIndex !== lastRangeRef.current.end) {
             lastRangeRef.current = { start: startIndex, end: endIndex };
             ensureDataForRange(startIndex, endIndex);
@@ -217,7 +220,7 @@ const VirtualWordList = memo(function VirtualWordList({
 
         // Position indicator
         const indicatorY = 40 + (clientHeight - 100) * scrollRatio;
-        
+
         setScrollIndicator({
             visible: true,
             text: indicator.main,
@@ -229,7 +232,7 @@ const VirtualWordList = memo(function VirtualWordList({
     // Handle scroll
     const handleScroll = useCallback((e) => {
         const { scrollTop, clientHeight } = e.target;
-        
+
         updateScrollIndicator(scrollTop, clientHeight);
 
         if (scrollTimeoutRef.current) {
@@ -270,7 +273,7 @@ const VirtualWordList = memo(function VirtualWordList({
     }
 
     return (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col" style={{ height: '100%' }}>
             {/* Results count */}
             <div className="flex items-center justify-between mb-3 px-1">
                 <p className="text-sm text-gray-600">
@@ -295,12 +298,13 @@ const VirtualWordList = memo(function VirtualWordList({
                 onScroll={handleScroll}
                 className="overflow-auto relative"
                 style={{ 
-                    height: 'calc(100vh - 300px)',
-                    minHeight: '400px'
+                    height: 'calc(100vh - 180px)',
+                    minHeight: '200px',
+                    maxHeight: '100%',
                 }}
             >
                 {/* Scroll Indicator */}
-                <ScrollIndicator 
+                <ScrollIndicator
                     visible={scrollIndicator.visible}
                     text={scrollIndicator.text}
                     subtext={scrollIndicator.subtext}
@@ -323,6 +327,7 @@ const VirtualWordList = memo(function VirtualWordList({
                             <div
                                 key={virtualRow.index}
                                 data-index={virtualRow.index}
+                                ref={virtualizer.measureElement}
                                 style={{
                                     position: 'absolute',
                                     top: 0,

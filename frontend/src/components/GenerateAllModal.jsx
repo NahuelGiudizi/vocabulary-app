@@ -271,10 +271,10 @@ const GenerateAllModal = memo(function GenerateAllModal({
                                 Theme: <span className="capitalize">{theme.replace('_', ' ')}</span>
                             </span>
                             <span className={`px-2 py-1 rounded text-xs font-medium ${status === 'running' ? 'bg-blue-100 text-blue-700' :
-                                    status === 'paused' ? 'bg-yellow-100 text-yellow-700' :
-                                        status === 'completed' ? 'bg-green-100 text-green-700' :
-                                            status === 'error' ? 'bg-red-100 text-red-700' :
-                                                'bg-gray-100 text-gray-700'
+                                status === 'paused' ? 'bg-yellow-100 text-yellow-700' :
+                                    status === 'completed' ? 'bg-green-100 text-green-700' :
+                                        status === 'error' ? 'bg-red-100 text-red-700' :
+                                            'bg-gray-100 text-gray-700'
                                 }`}>
                                 {status.charAt(0).toUpperCase() + status.slice(1)}
                             </span>
@@ -339,9 +339,9 @@ const GenerateAllModal = memo(function GenerateAllModal({
                                     <div
                                         key={i}
                                         className={`${log.type === 'error' ? 'text-red-600' :
-                                                log.type === 'success' ? 'text-green-600' :
-                                                    log.type === 'warning' ? 'text-amber-600' :
-                                                        'text-gray-600'
+                                            log.type === 'success' ? 'text-green-600' :
+                                                log.type === 'warning' ? 'text-amber-600' :
+                                                    'text-gray-600'
                                             }`}
                                     >
                                         <span className="text-gray-400">[{log.timestamp}]</span> {log.message}

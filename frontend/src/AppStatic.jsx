@@ -85,7 +85,7 @@ function Header({ onShowSettings }) {
  */
 function StatsBar({ stats }) {
     if (!stats) return null;
-    
+
     return (
         <div className="flex items-center gap-6 px-4 py-2 bg-gray-50 border-b border-gray-200 text-sm">
             <div className="flex items-center gap-2">
@@ -141,8 +141,8 @@ function SettingsPanel({ isOpen, onClose }) {
                             <div key={accent} className="space-y-2">
                                 <p className="text-xs font-medium text-gray-500 uppercase">
                                     {accent === 'en-US' ? 'American English' :
-                                     accent === 'en-GB' ? 'British English' :
-                                     'Australian English'}
+                                        accent === 'en-GB' ? 'British English' :
+                                            'Australian English'}
                                 </p>
                                 <div className="grid grid-cols-2 gap-2">
                                     {voices.map(voice => (
@@ -152,11 +152,10 @@ function SettingsPanel({ isOpen, onClose }) {
                                                 audio.changeVoice(voice.id);
                                                 handleTestVoice(voice.id);
                                             }}
-                                            className={`flex items-center justify-between p-3 rounded-lg border transition-colors ${
-                                                audio.currentVoice === voice.id
+                                            className={`flex items-center justify-between p-3 rounded-lg border transition-colors ${audio.currentVoice === voice.id
                                                     ? 'border-blue-500 bg-blue-50'
                                                     : 'border-gray-200 hover:bg-gray-50'
-                                            }`}
+                                                }`}
                                         >
                                             <div className="text-left">
                                                 <div className="font-medium text-sm">{voice.name}</div>
@@ -236,7 +235,7 @@ function App() {
     const [showSettings, setShowSettings] = useState(false);
 
     // Dummy refresh (no-op in static mode)
-    const handleRefresh = useCallback(() => {}, []);
+    const handleRefresh = useCallback(() => { }, []);
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">

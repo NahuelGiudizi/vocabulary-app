@@ -69,14 +69,14 @@ function openYouGlish(word, accent = 'us') {
  */
 function highlightWord(sentence, word) {
     if (!sentence || !word) return sentence;
-    
+
     const lemma = word.toLowerCase();
-    
+
     // Handle contractions
-    const contractions = ["don't", "can't", "won't", "isn't", "aren't", "wasn't", "weren't", 
-                          "hasn't", "haven't", "hadn't", "doesn't", "didn't", "wouldn't", 
-                          "couldn't", "shouldn't", "mustn't", "shan't", "needn't"];
-    
+    const contractions = ["don't", "can't", "won't", "isn't", "aren't", "wasn't", "weren't",
+        "hasn't", "haven't", "hadn't", "doesn't", "didn't", "wouldn't",
+        "couldn't", "shouldn't", "mustn't", "shan't", "needn't"];
+
     if (lemma === "n't") {
         for (const contraction of contractions) {
             const regex = new RegExp(`\\b(${contraction})\\b`, 'gi');
@@ -86,7 +86,7 @@ function highlightWord(sentence, word) {
         }
         return sentence;
     }
-    
+
     const regex = new RegExp(`\\b(${lemma}(?:s|es|ed|ing|er|est|ly)?)\\b`, 'gi');
     return sentence.replace(regex, '<mark class="bg-blue-100 text-blue-800 px-0.5 rounded">$1</mark>');
 }
@@ -214,7 +214,7 @@ const WordCardStatic = memo(function WordCardStatic({ word }) {
                                 >
                                     <Volume2 className="w-4 h-4" />
                                 </button>
-                                
+
                                 <button
                                     onClick={() => openYouGlish(sentence.text?.split(' ').slice(0, 5).join(' '))}
                                     className="mt-0.5 p-1.5 rounded-full hover:bg-amber-100 text-amber-600 transition-colors flex-shrink-0"

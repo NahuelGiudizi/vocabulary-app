@@ -5,16 +5,19 @@ Este worker provee Text-to-Speech usando la misma tecnología que Microsoft Edge
 ## Deploy
 
 1. Instalar Wrangler (CLI de Cloudflare):
+
 ```bash
 npm install -g wrangler
 ```
 
 2. Login en Cloudflare:
+
 ```bash
 wrangler login
 ```
 
 3. Deploy:
+
 ```bash
 cd worker
 wrangler deploy

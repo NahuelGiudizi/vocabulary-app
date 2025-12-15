@@ -371,7 +371,7 @@ export const extractWordContext = (sentence, targetWord) => {
 
     // Special handling for negation contraction "n't"
     const isNegationContraction = targetWord.toLowerCase() === "n't" || targetWord.toLowerCase() === "nt";
-    
+
     // List of valid negative contractions
     const negativeContractions = [
         "don't", "can't", "won't", "shouldn't", "couldn't", "wouldn't",
@@ -382,9 +382,9 @@ export const extractWordContext = (sentence, targetWord) => {
 
     // Split sentence into words (keeping punctuation attached)
     const words = sentence.split(/\s+/).filter(w => w);
-    
+
     let targetIndex = -1;
-    
+
     if (isNegationContraction) {
         // Find word that is a negative contraction
         targetIndex = words.findIndex(w => {
@@ -395,22 +395,22 @@ export const extractWordContext = (sentence, targetWord) => {
         // Clean words for comparison
         const cleanWords = words.map(w => w.replace(/[.,!?;:"'()\[\]]/g, '').toLowerCase());
         const targetLower = targetWord.toLowerCase();
-        
+
         // Find exact match first
         targetIndex = cleanWords.findIndex(w => w === targetLower);
-        
+
         // Try partial match if not found
         if (targetIndex === -1) {
             targetIndex = cleanWords.findIndex(w => w.includes(targetLower));
         }
     }
-    
+
     if (targetIndex === -1) return targetWord;
-    
+
     // Get 1 word before and 1 word after, clean punctuation from edges
     const start = Math.max(0, targetIndex - 1);
     const end = Math.min(words.length, targetIndex + 2);
-    
+
     return words.slice(start, end)
         .map(w => w.replace(/^[.,!?;:"'()\[\]]+|[.,!?;:"'()\[\]]+$/g, ''))
         .join(' ');

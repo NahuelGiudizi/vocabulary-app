@@ -17,7 +17,7 @@ export function useStaticWords(initialParams = {}) {
     // All words loaded from JSON
     const [allWords, setAllWords] = useState([]);
     const [meta, setMeta] = useState(null);
-    
+
     // Loading states
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -38,13 +38,13 @@ export function useStaticWords(initialParams = {}) {
         const loadData = async () => {
             setLoading(true);
             setError(null);
-            
+
             try {
                 const response = await fetch(DATA_URL);
                 if (!response.ok) {
                     throw new Error(`Failed to load words: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
                 setAllWords(data.words || []);
                 setMeta(data.meta || null);
@@ -67,7 +67,7 @@ export function useStaticWords(initialParams = {}) {
         // Search filter
         if (params.search) {
             const searchLower = params.search.toLowerCase();
-            result = result.filter(w => 
+            result = result.filter(w =>
                 w.lemma.toLowerCase().includes(searchLower)
             );
         }
@@ -78,7 +78,7 @@ export function useStaticWords(initialParams = {}) {
         }
 
         // Rank range filter
-        result = result.filter(w => 
+        result = result.filter(w =>
             w.rank >= params.rank_min && w.rank <= params.rank_max
         );
 
@@ -109,7 +109,7 @@ export function useStaticWords(initialParams = {}) {
 
     // Virtual scroll support
     const totalCount = filteredWords.length;
-    
+
     const getWordAtIndex = useCallback((index) => {
         return filteredWords[index];
     }, [filteredWords]);
@@ -172,8 +172,8 @@ export function useStaticWords(initialParams = {}) {
 
     // Computed
     const isEmpty = !loading && filteredWords.length === 0;
-    const hasFilters = params.search || params.pos || 
-        params.rank_min !== 1 || params.rank_max !== 5050 || 
+    const hasFilters = params.search || params.pos ||
+        params.rank_min !== 1 || params.rank_max !== 5050 ||
         params.sort_by !== 'rank';
 
     return {
@@ -183,19 +183,19 @@ export function useStaticWords(initialParams = {}) {
         isIndexLoaded,
         isIndexLoading,
         ensureDataForRange,
-        
+
         // Loading states
         initialLoading: loading,
         isLoading: false,
         loadedCount: filteredWords.length,
         error,
-        
+
         // Parameters
         params,
-        
+
         // Stats
         stats,
-        
+
         // Actions
         setSearch,
         setPos,
@@ -204,7 +204,7 @@ export function useStaticWords(initialParams = {}) {
         setSortBy,
         resetFilters,
         refresh,
-        
+
         // Computed
         isEmpty,
         hasFilters,

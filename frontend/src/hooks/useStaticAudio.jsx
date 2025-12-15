@@ -35,7 +35,7 @@ export function useStaticAudio() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [currentVoice, setCurrentVoice] = useState(getStoredVoice);
-    
+
     const audioRef = useRef(null);
     const abortControllerRef = useRef(null);
 
@@ -165,12 +165,12 @@ export function useStaticAudio() {
     const changeVoice = useCallback((voice) => {
         try {
             localStorage.setItem(VOICE_STORAGE_KEY, voice);
-        } catch {}
+        } catch { }
         setCurrentVoice(voice);
-        
+
         // Notify other components
-        window.dispatchEvent(new CustomEvent('voiceChange', { 
-            detail: { voice } 
+        window.dispatchEvent(new CustomEvent('voiceChange', {
+            detail: { voice }
         }));
     }, []);
 
@@ -192,7 +192,7 @@ export function useStaticAudio() {
         isLoading,
         error,
         currentVoice,
-        
+
         // Actions
         playText,
         playWord,

@@ -16,9 +16,9 @@ import WordCard from './WordCard';
  */
 function getScrollIndicator(word, sortBy) {
     if (!word) return { main: '', sub: '' };
-    
+
     const rank = word.rank || 0;
-    
+
     switch (sortBy) {
         case 'alpha':
         case 'alpha_desc':
@@ -42,9 +42,9 @@ function getScrollIndicator(word, sortBy) {
 /**
  * Scroll Indicator Component - shows current position while scrolling
  */
-const ScrollIndicator = memo(function ScrollIndicator({ 
-    visible, 
-    text, 
+const ScrollIndicator = memo(function ScrollIndicator({
+    visible,
+    text,
     subtext,
     top,
 }) {
@@ -60,9 +60,9 @@ const ScrollIndicator = memo(function ScrollIndicator({
                 opacity: visible ? 1 : 0,
             }}
         >
-            <div 
+            <div
                 className="flex items-center justify-end"
-                style={{ 
+                style={{
                     transform: 'translateY(-50%)',
                     paddingRight: '8px',
                 }}
@@ -74,7 +74,7 @@ const ScrollIndicator = memo(function ScrollIndicator({
                     )}
                 </div>
                 {/* Arrow pointing to scrollbar */}
-                <div 
+                <div
                     style={{
                         width: 0,
                         height: 0,
@@ -128,7 +128,7 @@ const VirtualWordList = memo(function VirtualWordList({
 
         // Find the word in the middle of the viewport
         const viewportMiddle = scrollTop + clientHeight / 2;
-        const middleItem = items.find(item => 
+        const middleItem = items.find(item =>
             item.start <= viewportMiddle && item.start + item.size >= viewportMiddle
         ) || items[Math.floor(items.length / 2)];
 
@@ -143,7 +143,7 @@ const VirtualWordList = memo(function VirtualWordList({
                 const scrollRatio = scrollTop / Math.max(1, scrollableHeight);
                 // Position within the container, leaving margin at top/bottom
                 const indicatorY = 40 + (clientHeight - 100) * scrollRatio;
-                
+
                 setScrollIndicator({
                     visible: true,
                     text: indicator.main,
@@ -157,7 +157,7 @@ const VirtualWordList = memo(function VirtualWordList({
     // Handle scroll with indicator
     const handleScroll = useCallback((e) => {
         const { scrollTop, scrollHeight, clientHeight } = e.target;
-        
+
         // Show scroll indicator
         updateScrollIndicator(scrollTop, clientHeight);
 
@@ -217,13 +217,13 @@ const VirtualWordList = memo(function VirtualWordList({
                 ref={parentRef}
                 onScroll={handleScroll}
                 className="overflow-auto relative"
-                style={{ 
+                style={{
                     height: 'calc(100vh - 300px)',
                     minHeight: '400px'
                 }}
             >
                 {/* Scroll Indicator - positioned relative to this container */}
-                <ScrollIndicator 
+                <ScrollIndicator
                     visible={scrollIndicator.visible}
                     text={scrollIndicator.text}
                     subtext={scrollIndicator.subtext}

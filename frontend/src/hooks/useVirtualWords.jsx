@@ -26,14 +26,14 @@ const BUFFER_SIZE = 20;
 export function useVirtualWords(initialParams = {}) {
     // Total count from server
     const [totalCount, setTotalCount] = useState(0);
-    
+
     // Sparse data cache: Map<index, wordData>
     const [dataCache, setDataCache] = useState(new Map());
-    
+
     // Track which chunks are loading/loaded
     const [loadingChunks, setLoadingChunks] = useState(new Set());
     const [loadedChunks, setLoadedChunks] = useState(new Set());
-    
+
     // Loading states
     const [initialLoading, setInitialLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -83,12 +83,12 @@ export function useVirtualWords(initialParams = {}) {
             );
 
             const response = await wordsApi.getWords(queryParams);
-            
+
             // Check if params changed while loading
             if (paramsVersion.current !== currentVersion) return;
 
             setTotalCount(response.pagination?.total || 0);
-            
+
             // Cache first chunk
             const newCache = new Map();
             (response.words || []).forEach((word, idx) => {
@@ -269,8 +269,8 @@ export function useVirtualWords(initialParams = {}) {
     // Computed values
     const loadedCount = dataCache.size;
     const isLoading = loadingChunks.size > 0;
-    const hasFilters = params.search || params.pos || 
-        params.rank_min !== 1 || params.rank_max !== 5050 || 
+    const hasFilters = params.search || params.pos ||
+        params.rank_min !== 1 || params.rank_max !== 5050 ||
         params.sort_by !== 'rank';
 
     return {
@@ -281,16 +281,16 @@ export function useVirtualWords(initialParams = {}) {
         isIndexLoading,
         getPlaceholderForIndex,
         ensureDataForRange,
-        
+
         // Loading states
         initialLoading,
         isLoading,
         loadedCount,
         error,
-        
+
         // Parameters
         params,
-        
+
         // Actions
         setSearch,
         setPos,
@@ -299,7 +299,7 @@ export function useVirtualWords(initialParams = {}) {
         setSortBy,
         resetFilters,
         refresh,
-        
+
         // Computed
         isEmpty: !initialLoading && totalCount === 0,
         hasFilters,
@@ -312,7 +312,7 @@ export function useVirtualWords(initialParams = {}) {
  */
 function getEstimatedLetter(index, total) {
     if (total === 0) return 'A';
-    
+
     // Rough distribution of English words by first letter
     // This is approximate - in practice we'd get this from the server
     const letterDistribution = [
@@ -324,7 +324,7 @@ function getEstimatedLetter(index, total) {
         ['U', 0.82], ['V', 0.84], ['W', 0.86], ['X', 0.90],
         ['Y', 0.91], ['Z', 0.93]
     ];
-    
+
     const ratio = index / total;
     for (let i = letterDistribution.length - 1; i >= 0; i--) {
         if (ratio >= letterDistribution[i][1]) {

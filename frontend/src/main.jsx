@@ -6,7 +6,7 @@ import './index.css'
 const IS_STATIC_MODE = import.meta.env.VITE_STATIC_MODE === 'true';
 
 // Dynamic import based on mode
-const App = IS_STATIC_MODE 
+const App = IS_STATIC_MODE
     ? React.lazy(() => import('./AppStatic.jsx'))
     : React.lazy(() => import('./App.jsx'));
 

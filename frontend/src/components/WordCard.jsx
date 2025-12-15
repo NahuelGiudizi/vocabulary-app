@@ -337,10 +337,10 @@ function highlightWord(text, word) {
     const parts = text.split(regex);
 
     return parts.map((part, i) => {
-        const isMatch = isNegationContraction 
+        const isMatch = isNegationContraction
             ? /^(don't|can't|won't|shouldn't|couldn't|wouldn't|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|didn't|mustn't|needn't|shan't|daren't|mightn't)$/i.test(part)
             : part.toLowerCase().startsWith(word.toLowerCase());
-        
+
         if (isMatch) {
             return (
                 <strong key={i} className="text-primary-600 font-semibold">
